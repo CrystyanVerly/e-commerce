@@ -1,0 +1,40 @@
+html {
+	font-family: var(--font-family-base);
+	color: var(--color-gray-900);
+	background: var(--color-white);
+}
+
+body {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-regular);
+	line-height: 1.6;
+
+	background: var(--color-white);
+	color: var(--color-gray-900);
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+	min-height: 100vh;
+}
+
+main {
+	min-height: 60vh;
+}
+
+button,
+a {
+	-webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+	outline: 2px solid var(--color-gray-900);
+	outline-offset: 3px;
+}
+
+::selection {
+	background: var(--color-gray-900);
+	color: var(--color-white);
+}
