@@ -1,0 +1,38 @@
+:root {
+	/* Layout */
+	--container-desktop: 1116px;
+	--page-margin: 12px;
+	--grid-gutter: 24px;
+
+	/* Spacing */
+	--space-1: 4px;
+	--space-2: 6px;
+	--space-3: 8px;
+	--space-4: 12px;
+	--space-5: 16px;
+	--space-6: 24px;
+	--space-7: 32px;
+	--space-8: 40px;
+	--space-9: 48px;
+	--space-10: 56px;
+	--space-11: 64px;
+	--space-12: 72px;
+
+	/* Typography */
+	--font-size-h1: 40px;
+	--font-size-h2: 32px;
+	--font-size-h3: 24px;
+	--font-size-h4: 18px;
+	--font-size-h5: 16px;
+	--font-size-h6: 14px;
+
+	--font-size-body: 14px;
+	--font-size-label: 12px;
+
+	--line-height-body: 1.75;
+
+	--font-weight-regular: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+}
