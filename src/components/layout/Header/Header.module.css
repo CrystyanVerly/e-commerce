@@ -1,0 +1,36 @@
+.header {
+	width: 100%;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.container {
+	min-height: 72px;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	gap: var(--space-6);
+}
+
+.logo {
+	font-size: var(--font-size-md);
+	font-weight: var(--font-weight-semibold);
+}
+
+.navigation {
+	display: flex;
+	align-items: center;
+
+	gap: var(--space-6);
+}
+
+.navigation a {
+	color: var(--color-gray-700);
+
+	transition: color var(--transition-fast);
+}
+
+.navigation a:hover {
+	color: var(--color-gray-900);
+}
