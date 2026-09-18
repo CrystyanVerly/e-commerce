@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '../../layouts/Container/Container';
+import Container from '../../layouts/Container/Container';
 
 const ListingPage = () => {
 	return (

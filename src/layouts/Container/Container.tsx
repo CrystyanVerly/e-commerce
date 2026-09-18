@@ -8,7 +8,7 @@ type ContainerProps<T extends ElementType = 'div'> = {
 	className?: string;
 } & Omit<ComponentPropsWithoutRef<T>, 'as' | 'children' | 'className'>;
 
-export function Container<T extends ElementType = 'div'>({
+export default function Container<T extends ElementType = 'div'>({
 	as,
 	children,
 	className = '',

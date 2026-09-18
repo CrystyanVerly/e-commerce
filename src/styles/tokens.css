@@ -38,16 +38,26 @@
 	--font-weight-semibold: 600;
 	--font-weight-bold: 700;
 
-	/* Temporary neutrals */
-	--color-white: #ffffff;
-	--color-black: #000000;
+	--color-neutral-900: #0e1422;
+	--color-neutral-800: #1f2533;
+	--color-neutral-700: #323844;
+	--color-neutral-600: #474b57;
+	--color-neutral-500: #5c5e6a;
+	--color-neutral-400: #71737f;
+	--color-neutral-300: #878a93;
+	--color-neutral-200: #b6b7bc;
+	--color-neutral-100: #e6e7e9;
+	--color-neutral-50: #f6f6f6;
 
-	--color-gray-50: #f6f6f6;
-	--color-gray-100: #eeeeee;
-	--color-gray-300: #cfcfcf;
-	--color-gray-500: #717171;
-	--color-gray-700: #404040;
-	--color-gray-900: #202020;
+	--color-white: #ffffff;
+
+	--color-text: var(--color-neutral-900);
+	--color-text-muted: var(--color-neutral-500);
+
+	--color-border: var(--color-neutral-100);
+
+	--color-background: var(--color-white);
+	--color-background-muted: var(--color-neutral-50);
 
 	/* Border */
 	--border-color: var(--color-gray-100);

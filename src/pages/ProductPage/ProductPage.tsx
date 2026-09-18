@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Container } from '../../layouts/Container/Container';
+import Container from '../../layouts/Container/Container';
 
 export function ProductPage() {
 	const { slug } = useParams();

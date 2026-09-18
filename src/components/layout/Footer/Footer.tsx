@@ -1,4 +1,4 @@
-import { Container } from '../../../layouts/Container/Container';
+import Container from '../../../layouts/Container/Container';
 import styles from './Footer.module.css';
 
 const Footer = () => {
