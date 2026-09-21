@@ -1,11 +1,12 @@
 import React from 'react';
-import Container from '../../layouts/Container/Container';
+
+import { Hero } from './components/Hero/Hero';
 
 const HomePage = () => {
 	return (
-		<Container>
-			<h1>Home</h1>
-		</Container>
+		<>
+			<Hero />
+		</>
 	);
 };
 
