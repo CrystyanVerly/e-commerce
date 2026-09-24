@@ -1,11 +1,13 @@
-import React from 'react';
-
 import styles from './ProductCard.module.css';
 import { Link } from 'react-router-dom';
 import type { Product } from '../../../types/product';
 import formatPrice from '../../../utils/formatPrice';
 
-const ProductCard = (product: Product) => {
+interface ProductCardProps {
+	product: Product;
+}
+
+const ProductCard = ({ product }: ProductCardProps) => {
 	const image = product.images[0];
 	return (
 		<article className={styles.card}>
