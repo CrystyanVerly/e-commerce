@@ -6,6 +6,14 @@ export interface Category {
 	updatedAt: string;
 }
 
+export interface ProductImage {
+	id: number;
+	url: string;
+	alt: string | null;
+	position: number;
+	productId: number;
+}
+
 export interface ProductVariant {
 	id: number;
 	sku: string;
@@ -22,11 +30,11 @@ export interface Product {
 	name: string;
 	slug: string;
 	description: string;
-	priceInCents: number;
-	imageUrl: string;
+	price: number;
 	gender: string;
 	categoryId: number;
 	category: Category;
+	image: ProductImage[];
 	variants: ProductVariant[];
 	createdAt: string;
 	updatedAt: string;
@@ -50,9 +58,7 @@ export interface ProductFilters {
 	color?: string;
 	size?: string;
 	search?: string;
-
 	sort?: 'newest' | 'oldest' | 'price-asc' | 'price-desc' | 'name-asc';
-
 	page?: number;
 	limit?: number;
 }
