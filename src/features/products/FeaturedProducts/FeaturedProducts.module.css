@@ -1,0 +1,16 @@
+.section {
+	padding: 4rem 0;
+}
+
+.container {
+	width: min(100% - 2rem, 1440px);
+	margin-inline: auto;
+}
+
+.header {
+	margin-bottom: 2rem;
+}
+
+.header h2 {
+	margin: 0;
+}
