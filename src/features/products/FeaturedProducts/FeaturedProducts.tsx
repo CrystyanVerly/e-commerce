@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './FeaturedProducts.module.css';
 import useProducts from '../../../hooks/useProducts';
 

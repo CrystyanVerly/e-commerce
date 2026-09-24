@@ -9,11 +9,10 @@ import heroImage1 from '../../../../assets/home/hero1.webp';
 import heroImage2 from '../../../../assets/home/hero2.webp';
 import heroImage3 from '../../../../assets/home/hero3.webp';
 
-import arrowRight from '../../../../assets/icons/ArrowRight.svg';
-
 import Container from '../../../../layouts/Container/Container';
 
 import styles from './Hero.module.css';
+import { Button } from '../../../../components/ui/Button/Button';
 
 const heroSlides = [
 	{
@@ -96,17 +95,13 @@ export function Hero() {
 								<p>{slide.description}</p>
 
 								<Link to={slide.link} className={styles.cta}>
-									{slide.linkLabel}
-
-									<img src={arrowRight} alt="" aria-hidden="true" />
+									<Button variant="secondary">{slide.linkLabel}</Button>
 								</Link>
 							</div>
 						</Container>
 					</article>
 				))}
 			</div>
-
-			<div className={styles.overlay} aria-hidden="true" />
 		</section>
 	);
 }
