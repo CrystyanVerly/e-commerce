@@ -30,11 +30,11 @@ export interface Product {
 	name: string;
 	slug: string;
 	description: string;
-	price: number;
+	priceInCents: number;
 	gender: string;
 	categoryId: number;
 	category: Category;
-	image: ProductImage[];
+	images: ProductImage[];
 	variants: ProductVariant[];
 	createdAt: string;
 	updatedAt: string;
