@@ -76,6 +76,17 @@
 	letter-spacing: 0.04em;
 }
 
+.cta {
+	pointer-events: none;
+}
+
+.banner:hover .cta {
+	color: var(--color-text-inverse);
+
+	background-color: var(--color-background-inverse);
+	border-color: var(--color-background-inverse);
+}
+
 @media (max-width: 768px) {
 	.section {
 		margin-top: 3rem;

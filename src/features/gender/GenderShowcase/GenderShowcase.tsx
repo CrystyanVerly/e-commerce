@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import femaleBanner from '../../../assets/home/female-banner.webp';
 import maleBanner from '../../../assets/home/male-banner.webp';
 
+import buttonStyles from '../../../components/ui/Button/Button.module.css';
 import styles from './GenderShowcase.module.css';
-import { Button } from '../../../components/ui/Button/Button';
 
 const GenderShowcase = () => {
 	return (
@@ -16,7 +16,11 @@ const GenderShowcase = () => {
 					<div className={styles.content}>
 						<h2>Men's</h2>
 
-						<Button variant="secondary">Shop now</Button>
+						<span
+							className={`${buttonStyles.button} ${buttonStyles.secondary} ${styles.cta}`}
+						>
+							Shop now
+						</span>
 					</div>
 				</Link>
 
@@ -26,7 +30,11 @@ const GenderShowcase = () => {
 					<div className={styles.content}>
 						<h2>Women's</h2>
 
-						<Button variant="secondary">Shop now</Button>
+						<span
+							className={`${buttonStyles.button} ${buttonStyles.secondary} ${styles.cta}`}
+						>
+							Shop now
+						</span>
 					</div>
 				</Link>
 			</div>
