@@ -1,6 +1,7 @@
 .container {
 	width: min(100% - 2rem, 1440px);
 	margin-inline: auto;
+	padding-top: 2rem;
 }
 
 .header {
@@ -66,8 +67,8 @@
 }
 
 .slide {
-	min-width: 0;
 	user-select: none;
+	height: fit-content !important;
 }
 
 .slide img {

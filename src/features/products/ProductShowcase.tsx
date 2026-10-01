@@ -39,6 +39,12 @@ const ProductShowcase = ({
 				loop: true,
 				itemsPerView: 4,
 				slideBy: 'item',
+
+				autoplay: {
+					enabled: true,
+					pauseOnHover: false,
+					delay: 4000,
+				},
 			},
 		});
 
