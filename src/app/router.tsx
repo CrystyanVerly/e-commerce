@@ -9,6 +9,8 @@ import Contact from '../pages/Contact/Contact';
 import Cart from '../pages/Cart/Cart';
 import Login from '../pages/Login/Login';
 
+import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
+
 export const router = createBrowserRouter([
 	{
 		element: <StoreLayout />,
@@ -40,6 +42,10 @@ export const router = createBrowserRouter([
 			{
 				path: '/login',
 				element: <Login />,
+			},
+			{
+				path: '*',
+				element: <NotFoundPage />,
 			},
 		],
 	},

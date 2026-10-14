@@ -13,9 +13,13 @@
 .slide {
 	position: relative;
 	width: 100%;
-	min-height: clamp(560px, 75vh, 780px);
 	overflow: hidden;
 	background: var(--color-neutral-900);
+	height: auto !important;
+}
+
+[data-slide='slide'] {
+	height: fit-content !important;
 }
 
 /* IMAGE */

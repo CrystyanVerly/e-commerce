@@ -1,21 +1,31 @@
+.section {
+	padding: 5rem 0;
+
+	overflow: hidden;
+}
+
 .container {
 	width: min(100% - 2rem, 1440px);
 	margin-inline: auto;
-	padding-top: 2rem;
 }
 
 .header {
 	display: flex;
 	align-items: flex-end;
 	justify-content: space-between;
+
 	gap: 2rem;
+
 	margin-bottom: 2rem;
 }
 
 .eyebrow {
 	display: block;
+
 	margin-bottom: 0.5rem;
+
 	color: var(--color-text-muted);
+
 	font-size: 0.75rem;
 	font-weight: 500;
 	text-transform: uppercase;
@@ -24,7 +34,9 @@
 
 .title {
 	margin: 0;
+
 	color: var(--color-text);
+
 	font-size: clamp(1.75rem, 3vw, 2.5rem);
 	font-weight: 500;
 	line-height: 1.1;
@@ -32,13 +44,17 @@
 
 .viewAll {
 	padding-bottom: 0.2rem;
+
 	color: var(--color-text);
 	text-decoration: none;
+
 	font-size: 0.75rem;
 	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+
 	border-bottom: 1px solid currentColor;
+
 	transition: opacity var(--transition-fast);
 }
 
@@ -50,8 +66,10 @@
 
 .slider {
 	position: relative;
+
 	width: 100%;
 	overflow: hidden;
+
 	cursor: grab;
 	touch-action: pan-y;
 }
@@ -62,21 +80,22 @@
 
 .rail {
 	display: flex;
+
 	gap: 1.25rem;
+
 	will-change: transform;
 }
 
 .slide {
+	min-width: 0;
+
 	user-select: none;
-	height: fit-content !important;
 }
 
 .slide img {
 	user-select: none;
 	-webkit-user-drag: none;
 }
-
-/* RESPONSIVE */
 
 @media (max-width: 1024px) {
 	.section {
@@ -100,7 +119,9 @@
 	.header {
 		align-items: flex-start;
 		flex-direction: column;
+
 		gap: 1rem;
+
 		margin-bottom: 1.5rem;
 	}
 

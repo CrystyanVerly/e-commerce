@@ -7,7 +7,7 @@ export interface FetchState<T> {
 	refetch: () => void;
 }
 
-const useFetch = <T,>(
+const useFetch = <T>(
 	url: RequestInfo | URL,
 	options?: RequestInit,
 ): FetchState<T> => {
@@ -44,17 +44,11 @@ const useFetch = <T,>(
 					setError(null);
 				}
 			} catch (error) {
-				if (error instanceof Error && error.name === 'AbortError') {
-					return;
-				}
+				if (error instanceof Error && error.name === 'AbortError') return;
 
-				if (error instanceof Error) {
-					setError(error);
-				}
+				if (error instanceof Error) setError(error);
 			} finally {
-				if (!controller.signal.aborted) {
-					setLoading(false);
-				}
+				if (!controller.signal.aborted) setLoading(false);
 			}
 		}
 
