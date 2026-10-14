@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 
 import Slide from 'tslider';
@@ -15,6 +16,18 @@ interface ProductShowcaseProps {
 	viewAllTo?: string;
 }
 
+const getItemsPerView = () => {
+	const width = window.innerWidth;
+
+	if (width >= 1200) return 4;
+
+	if (width >= 768) return 3;
+
+	if (width >= 480) return 2;
+
+	return 1;
+};
+
 const ProductShowcase = ({
 	title,
 	eyebrow,
@@ -26,6 +39,28 @@ const ProductShowcase = ({
 	const wrapperId = `showcase-wrapper-${id}`;
 	const railId = `showcase-rail-${id}`;
 
+	const [itemsPerView, setItemsPerView] = React.useState(getItemsPerView);
+
+	React.useEffect(() => {
+		const handleResize = () => {
+			const nextItemsPerView = getItemsPerView();
+
+			setItemsPerView((current) => {
+				if (current === nextItemsPerView) {
+					return current;
+				}
+
+				return nextItemsPerView;
+			});
+		};
+
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
+
 	React.useEffect(() => {
 		if (products.length === 0) return;
 
@@ -35,11 +70,12 @@ const ProductShowcase = ({
 
 			options: {
 				loop: true,
-				itemsPerView: 4,
+				itemsPerView,
 				slideBy: 'item',
+
 				autoplay: {
 					enabled: true,
-					delay: 4000,
+					delay: 3500,
 				},
 			},
 		});
@@ -49,9 +85,11 @@ const ProductShowcase = ({
 		return () => {
 			slider.destroy();
 		};
-	}, [products.length, wrapperId, railId]);
+	}, [products.length, itemsPerView, wrapperId, railId]);
 
-	if (products.length === 0) return null;
+	if (products.length === 0) {
+		return null;
+	}
 
 	return (
 		<section className={styles.section}>
