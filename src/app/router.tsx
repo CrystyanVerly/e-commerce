@@ -6,10 +6,10 @@ import { ProductPage } from '../pages/ProductPage/ProductPage';
 import About from '../pages/About/About';
 import Contact from '../pages/Contact/Contact';
 import Cart from '../pages/Cart/Cart';
-import Login from '../pages/Login/Login';
 
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
 import ShopPage from '../pages/ShopPage/ShopPage';
+import Login from '../pages/Login/Login';
 
 export const router = createBrowserRouter([
 	{

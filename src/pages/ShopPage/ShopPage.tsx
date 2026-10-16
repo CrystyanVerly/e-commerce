@@ -2,6 +2,8 @@ import ProductGrid from '../../components/layout/ProductGrid/ProductGrid';
 import { Button } from '../../components/ui/Button/Button';
 import useProducts from '../../hooks/useProducts';
 
+import { useSearchParams } from 'react-router-dom';
+
 import styles from './ShopPage.module.css';
 
 import closeBtn from '../../assets/icons/Close.svg';
@@ -12,10 +14,30 @@ import arrowRight from '../../assets/icons/ArrowRight.svg';
 import arrowLeft from '../../assets/icons/ArrowLeft.svg';
 
 const ShopPage = () => {
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const gender = searchParams.get('gender') ?? undefined;
+	const category = searchParams.get('category') ?? undefined;
+
 	const { products, loading, error, refetch } = useProducts({
+		gender,
+		category,
 		page: 1,
 		limit: 12,
 	});
+
+	const updateFilter = (key: string, value?: string) => {
+		setSearchParams((current) => {
+			const params = new URLSearchParams(current);
+
+			if (value) params.set(key, value);
+			else params.delete(key);
+
+			params.set('page', '1');
+
+			return params;
+		});
+	};
 
 	if (loading) return null;
 
@@ -53,6 +75,46 @@ const ShopPage = () => {
 				<div className={styles.layout}>
 					<aside className={styles.sidebar}>
 						<div className={styles.filterGroup}>
+							<div className={styles.filterGroup}>
+								<h2>Gender</h2>
+
+								<label className={styles.radio}>
+									<input
+										type="radio"
+										name="gender"
+										value=""
+										checked={!gender}
+										onChange={() => updateFilter('gender')}
+									/>
+
+									<span>All</span>
+								</label>
+
+								<label className={styles.radio}>
+									<input
+										type="radio"
+										name="gender"
+										value="male"
+										checked={gender === 'male'}
+										onChange={() => updateFilter('gender', 'male')}
+									/>
+
+									<span>Men</span>
+								</label>
+
+								<label className={styles.radio}>
+									<input
+										type="radio"
+										name="gender"
+										value="female"
+										checked={gender === 'female'}
+										onChange={() => updateFilter('gender', 'female')}
+									/>
+
+									<span>Women</span>
+								</label>
+							</div>
+
 							<h2>Categories</h2>
 
 							<label className={styles.checkbox}>
@@ -159,6 +221,15 @@ const ShopPage = () => {
 										<img src={closeBtn} alt="" />
 									</span>
 								</button>
+
+								{(gender || category) && (
+									<Button
+										variant="secondary"
+										onClick={() => setSearchParams({})}
+									>
+										Clear filters
+									</Button>
+								)}
 							</div>
 						</div>
 

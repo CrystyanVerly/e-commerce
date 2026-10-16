@@ -78,6 +78,48 @@
 	letter-spacing: 0.08em;
 }
 
+/* RADIO */
+
+.radio {
+	display: flex;
+	align-items: center;
+
+	gap: 0.65rem;
+
+	padding: 0.6rem 0;
+
+	color: var(--color-text-muted);
+
+	font-size: 0.72rem;
+
+	cursor: pointer;
+
+	transition: color var(--transition-fast);
+}
+
+.radio:hover {
+	color: var(--color-text);
+}
+
+.radio + .radio {
+	border-top: 1px solid var(--color-border);
+}
+
+.radio input {
+	width: 14px;
+	height: 14px;
+
+	margin: 0;
+
+	accent-color: var(--color-neutral-900);
+
+	cursor: pointer;
+}
+
+.radio:last-child {
+	margin-bottom: 1rem;
+}
+
 /* CHECKBOX */
 
 .checkbox {
