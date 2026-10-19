@@ -1,28 +1,69 @@
 import React from 'react';
 
-import type { ProductFilters, ProductsResponse } from '../types/product';
-
-import useFetch from './useFetch';
 import { getApiUrl } from '../services/api/client';
 
-const useProducts = (filters: ProductFilters = {}) => {
-	const url = React.useMemo(() => {
-		const searchParams = new URLSearchParams();
+import type { ProductFilters, ProductsResponse } from '../types/product';
+import useFetch from './useFetch';
 
-		Object.entries(filters).forEach(([key, value]) => {
-			if (value === undefined || value === '') {
-				return;
-			}
+function appendFilter(
+	params: URLSearchParams,
+	key: string,
+	value?: string | string[],
+) {
+	if (!value) return;
 
-			searchParams.set(key, String(value));
+	if (Array.isArray(value)) {
+		value.forEach((item) => {
+			params.append(key, item);
 		});
 
-		const query = searchParams.toString();
+		return;
+	}
 
-		const path = query ? `/products?${query}` : '/products';
+	params.append(key, value);
+}
 
-		return getApiUrl(path);
-	}, [filters]);
+export function useProducts(filters: ProductFilters = {}) {
+	const url = React.useMemo(() => {
+		const params = new URLSearchParams();
+
+		if (filters.gender) params.set('gender', filters.gender);
+
+		appendFilter(params, 'category', filters.category);
+
+		appendFilter(params, 'color', filters.color);
+
+		appendFilter(params, 'size', filters.size);
+
+		if (filters.minPrice !== undefined)
+			params.set('minPrice', String(filters.minPrice));
+
+		if (filters.maxPrice !== undefined)
+			params.set('maxPrice', String(filters.maxPrice));
+
+		if (filters.search) params.set('search', filters.search);
+
+		if (filters.sort) params.set('sort', filters.sort);
+
+		if (filters.page !== undefined) params.set('page', String(filters.page));
+
+		if (filters.limit !== undefined) params.set('limit', String(filters.limit));
+
+		const query = params.toString();
+
+		return getApiUrl(`/products${query ? `?${query}` : ''}`);
+	}, [
+		filters.gender,
+		filters.category,
+		filters.color,
+		filters.size,
+		filters.minPrice,
+		filters.maxPrice,
+		filters.search,
+		filters.sort,
+		filters.page,
+		filters.limit,
+	]);
 
 	const { data, loading, error, refetch } = useFetch<ProductsResponse>(url);
 
@@ -33,6 +74,6 @@ const useProducts = (filters: ProductFilters = {}) => {
 		error,
 		refetch,
 	};
-};
+}
 
 export default useProducts;

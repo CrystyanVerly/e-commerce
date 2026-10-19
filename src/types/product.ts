@@ -54,11 +54,18 @@ export interface ProductsResponse {
 
 export interface ProductFilters {
 	gender?: string;
-	category?: string;
-	color?: string;
-	size?: string;
+
+	category?: string | string[];
+	color?: string | string[];
+	size?: string | string[];
+
+	minPrice?: number;
+	maxPrice?: number;
+
 	search?: string;
+
 	sort?: 'newest' | 'oldest' | 'price-asc' | 'price-desc' | 'name-asc';
+
 	page?: number;
 	limit?: number;
 }
