@@ -69,3 +69,20 @@ export interface ProductFilters {
 	page?: number;
 	limit?: number;
 }
+
+export interface ProductFilterCategory {
+	name: string;
+	slug: string;
+}
+
+export interface ProductFilterOptions {
+	categories: ProductFilterCategory[];
+	genders: string[];
+	colors: string[];
+	sizes: string[];
+
+	price: {
+		min: number;
+		max: number;
+	};
+}
