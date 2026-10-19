@@ -35,6 +35,11 @@ a {
 }
 
 ::selection {
-	background: var(--color-gray-900);
-	color: var(--color-white);
+	color: var(--color-text-inverse);
+	background-color: var(--color-background-inverse);
+}
+
+::-moz-selection {
+	color: var(--color-text-inverse);
+	background-color: var(--color-background-inverse);
 }

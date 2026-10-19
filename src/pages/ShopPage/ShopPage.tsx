@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { useSearchParams } from 'react-router-dom';
 
 import ProductGrid from '../../components/layout/ProductGrid/ProductGrid';
@@ -5,6 +7,8 @@ import { Button } from '../../components/ui/Button/Button';
 
 import useProducts from '../../hooks/useProducts';
 import { useProductFilters } from '../../hooks/useProductFilters';
+import PriceRange from '../../components/ui/PriceRange/PriceRange';
+import formatPrice from '../../utils/formatPrice';
 
 import closeBtn from '../../assets/icons/Close.svg';
 import ChevronDown from '../../assets/icons/ChevronDown.svg';
@@ -15,6 +19,7 @@ import styles from './ShopPage.module.css';
 
 const ShopPage = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
+	const [filtersOpen, setFiltersOpen] = React.useState(false);
 
 	const gender = searchParams.get('gender') ?? undefined;
 
@@ -123,6 +128,56 @@ const ShopPage = () => {
 		});
 	};
 
+	const updatePriceFilter = (nextMin: number, nextMax: number) => {
+		if (!filterOptions) {
+			return;
+		}
+
+		setSearchParams((current) => {
+			const params = new URLSearchParams(current);
+
+			const catalogMin = filterOptions.price.min;
+
+			const catalogMax = filterOptions.price.max;
+
+			if (nextMin > catalogMin) {
+				params.set('minPrice', String(nextMin));
+			} else {
+				params.delete('minPrice');
+			}
+
+			if (nextMax < catalogMax) {
+				params.set('maxPrice', String(nextMax));
+			} else {
+				params.delete('maxPrice');
+			}
+
+			params.set('page', '1');
+
+			return params;
+		});
+	};
+
+	const clearPriceFilter = () => {
+		setSearchParams((current) => {
+			const params = new URLSearchParams(current);
+
+			params.delete('minPrice');
+			params.delete('maxPrice');
+
+			params.set('page', '1');
+
+			return params;
+		});
+	};
+
+	const activeFiltersCount =
+		(gender ? 1 : 0) +
+		categories.length +
+		colors.length +
+		sizes.length +
+		(minPrice !== undefined || maxPrice !== undefined ? 1 : 0);
+
 	const hasActiveFilters =
 		Boolean(gender) ||
 		categories.length > 0 ||
@@ -165,7 +220,31 @@ const ShopPage = () => {
 				</header>
 
 				<div className={styles.layout}>
-					<aside className={styles.sidebar}>
+					{filtersOpen && (
+						<button
+							type="button"
+							className={styles.filterBackdrop}
+							aria-label="Close filters"
+							onClick={() => setFiltersOpen(false)}
+						/>
+					)}
+
+					<aside
+						className={`${styles.sidebar} ${
+							filtersOpen ? styles.sidebarOpen : ''
+						}`}
+					>
+						<div className={styles.mobileFilterHeader}>
+							<span>Filters</span>
+
+							<button
+								type="button"
+								aria-label="Close filters"
+								onClick={() => setFiltersOpen(false)}
+							>
+								<img src={closeBtn} alt="" />
+							</button>
+						</div>
 						{/* GENDER */}
 
 						<div className={styles.filterGroup}>
@@ -278,27 +357,20 @@ const ShopPage = () => {
 
 						{/* PRICE */}
 
-						<div className={styles.filterGroup}>
-							<h2>Price</h2>
+						{filterOptions && (
+							<div className={styles.filterGroup}>
+								<h2>Price</h2>
 
-							<input
-								className={styles.range}
-								type="range"
-								min={filterOptions?.price.min ?? 0}
-								max={filterOptions?.price.max ?? 0}
-								defaultValue={filterOptions?.price.max ?? 0}
-							/>
-
-							<div className={styles.priceRange}>
-								<span>
-									R$ {((filterOptions?.price.min ?? 0) / 100).toFixed(2)}
-								</span>
-
-								<span>
-									R$ {((filterOptions?.price.max ?? 0) / 100).toFixed(2)}
-								</span>
+								<PriceRange
+									key={`${minPrice ?? 'min'}-${maxPrice ?? 'max'}`}
+									min={filterOptions.price.min}
+									max={filterOptions.price.max}
+									valueMin={minPrice ?? filterOptions.price.min}
+									valueMax={maxPrice ?? filterOptions.price.max}
+									onCommit={updatePriceFilter}
+								/>
 							</div>
-						</div>
+						)}
 					</aside>
 
 					<section className={styles.results}>
@@ -365,6 +437,21 @@ const ShopPage = () => {
 									</button>
 								))}
 
+								{(minPrice !== undefined || maxPrice !== undefined) &&
+									filterOptions && (
+										<button type="button" onClick={clearPriceFilter}>
+											{formatPrice(minPrice ?? filterOptions.price.min)}
+
+											{' — '}
+
+											{formatPrice(maxPrice ?? filterOptions.price.max)}
+
+											<span>
+												<img src={closeBtn} alt="" />
+											</span>
+										</button>
+									)}
+
 								{hasActiveFilters && (
 									<Button
 										type="button"
@@ -380,9 +467,25 @@ const ShopPage = () => {
 						{/* RESULTS HEADER */}
 
 						<div className={styles.resultsHeader}>
-							<span className={styles.count}>
-								Showing {pagination?.total ?? products.length} results
-							</span>
+							<div className={styles.resultsInfo}>
+								<button
+									type="button"
+									className={styles.openFilters}
+									onClick={() => setFiltersOpen(true)}
+								>
+									<span>Filters</span>
+
+									{activeFiltersCount > 0 && (
+										<span className={styles.filterCount}>
+											{activeFiltersCount}
+										</span>
+									)}
+								</button>
+
+								<span className={styles.count}>
+									Showing {pagination?.total ?? products.length} results
+								</span>
+							</div>
 
 							<button type="button" className={styles.sort}>
 								Sort by
